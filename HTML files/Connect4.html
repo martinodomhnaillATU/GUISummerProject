@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Four in a Row</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+
+body 
+{
+  background: radial-gradient(circle at top, #1e3a8a, #020617);
+  color: white;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+.banner 
+{
+  padding: 30px;
+  font-size: 3rem;
+  font-weight: bold;
+  background: linear-gradient(90deg, #3b82f6, #9333ea);
+  border-radius: 15px;
+  margin: 20px auto;
+  width: fit-content;
+}
+.board 
+{
+  display: grid;
+  grid-template-columns: repeat(7, 80px);
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+  padding: 15px;
+  background: #1d4ed8;
+  border-radius: 15px;
+}
+.cell 
+{
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #0f172a;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.piece 
+{
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  position: absolute;
+  top: -100px;
+  left: 0;
+  transition: top 0.3s ease-in;
+}
+.player1 
+{ 
+background: maroon; 
+}
+.player2 
+{ 
+background: white; 
+}
+.win 
+{ 
+box-shadow: 0 0 15px 5px gold; 
+}
+.turn-alert 
+{
+  margin: 15px;
+  font-size: 1.5rem;
+}
+.scoreboard 
+{
+  margin-top: 20px;
+  font-size: 1.3rem;
+}
+</style>
+</head>
+<body>
+
+<div class="banner">🎮 Welcome to Four in a Row</div>
+<p>Connect four pieces in a row (horizontal, vertical, or diagonal) before your opponent!</p>
+
+<div class="turn-alert" id="turnText">Player 1's Turn</div>
+
+<div class="board" id="board"></div>
+
+<div class="scoreboard">
+  🟥 Player 1: <span id="p1Score">0</span> |
+  ⚪ Player 2: <span id="p2Score">0</span>
+</div>
+
+<button class="btn btn-success" onclick="resetBoard()">Play Again</button>
+<button class="btn btn-danger" onclick="resetScores()">Reset Scores</button>
+
+<div class="modal fade" id="winModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-dark text-center p-3">
+      <h2 id="winnerText"></h2>
+      <button class="btn btn-primary" onclick="resetBoard()" data-bs-dismiss="modal">Play Again</button>
+    </div>
+  </div>
+</div>
+
+<audio id="dropSound" src="https://www.soundjay.com/buttons/sounds/button-16.mp3"></audio>
+<audio id="winSound" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3"></audio>
+
+<script>
+const rows = 6;
+const cols = 7;
+let board = [];
+let currentPlayer = 1;
+let scores = {1: 0, 2: 0};
+let gameOver = false;
+
+function createBoard() 
+{
+  const boardDiv = document.getElementById('board');
+  boardDiv.innerHTML = '';
+  board = [];
+  gameOver = false;
+
+  for (let r = 0; r < rows; r++) 
+  {
+    let row = [];
+    for (let c = 0; c < cols; c++) 
+    {
+      const cell = document.createElement('div');
+      cell.classList.add('cell');
+      cell.dataset.row = r;
+      cell.dataset.col = c;
+      cell.addEventListener('click', handleClick);
+      boardDiv.appendChild(cell);
+      row.push(0);
+    }
+    board.push(row);
+  }
+}
+
+function handleClick(e) 
+{
+  if (gameOver) return;
+  const col = e.target.dataset.col;
+
+  for (let r = rows - 1; r >= 0; r--) 
+  {
+    if (board[r][col] === 0) 
+    {
+      board[r][col] = currentPlayer;
+      dropPiece(r, col);
+      document.getElementById('dropSound').play();
+
+      const winCells = checkWin(r, col);
+      if (winCells) 
+      {
+        gameOver = true;
+        highlightWin(winCells);
+        scores[currentPlayer]++;
+        updateScores();
+        document.getElementById('winSound').play();
+        setTimeout(() => showWinner(), 400);
+        return;
+      }
+
+      currentPlayer = currentPlayer === 1 ? 2 : 1;
+      updateTurnText();
+      return;
+    }
+  }
+  alert("Column is full!");
+}
+
+function dropPiece(r, c) 
+{
+  const cells = document.querySelectorAll('.cell');
+  cells.forEach(cell => 
+  {
+    if (cell.dataset.row == r && cell.dataset.col == c) 
+    {
+      const piece = document.createElement('div');
+      piece.classList.add('piece', currentPlayer === 1 ? 'player1' : 'player2');
+      cell.appendChild(piece);
+      setTimeout(() => piece.style.top = '0px', 10);
+    }
+  });
+}
+
+function updateTurnText() 
+{
+  document.getElementById('turnText').innerText = `Player ${currentPlayer}'s Turn`;
+}
+
+function updateScores() 
+{
+  document.getElementById('p1Score').innerText = scores[1];
+  document.getElementById('p2Score').innerText = scores[2];
+}
+
+function resetBoard() 
+{
+  currentPlayer = 1;
+  createBoard();
+  updateTurnText();
+}
+
+function resetScores() 
+{
+  scores = {1:0,2:0};
+  updateScores();
+}
+
+function showWinner() 
+{
+  document.getElementById('winnerText').innerText = `🎉 Player ${currentPlayer} Wins!`;
+  new bootstrap.Modal(document.getElementById('winModal')).show();
+}
+
+function checkWin(r, c) 
+{
+  return (
+    checkDirection(r,c,1,0) ||
+    checkDirection(r,c,0,1) ||
+    checkDirection(r,c,1,1) ||
+    checkDirection(r,c,1,-1)
+  );
+}
+
+function checkDirection(r,c,dr,dc) 
+{
+  let cells = [[r,c]];
+  cells = cells.concat(countCells(r,c,dr,dc));
+  cells = cells.concat(countCells(r,c,-dr,-dc));
+  return cells.length >= 4 ? cells : null;
+}
+
+function countCells(r,c,dr,dc) 
+{
+  let result = [];
+  let player = board[r][c];
+  let nr = r+dr, nc = c+dc;
+  while(nr>=0 && nr<rows && nc>=0 && nc<cols && board[nr][nc]===player)
+  {
+    result.push([nr,nc]);
+    nr+=dr; nc+=dc;
+  }
+  return result;
+}
+
+function highlightWin(cells) {
+  const allCells = document.querySelectorAll('.cell');
+  cells.forEach(([r,c]) => {
+    allCells.forEach(cell => {
+      if(cell.dataset.row==r && cell.dataset.col==c){
+        cell.classList.add('win');
+      }
+    });
+  });
+}
+
+createBoard();
+</script>
+
+</body>
+</html>
