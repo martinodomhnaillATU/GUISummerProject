@@ -14,7 +14,7 @@ function rounds()
     n = document.getElementById("n").value;
     
     
-    for(let i = 1 ; j <= n ; i++)
+    for(let i = 1 ; i <= n ; i++)
     {
         
         n1 = Math.floor(Math.random()*100);
