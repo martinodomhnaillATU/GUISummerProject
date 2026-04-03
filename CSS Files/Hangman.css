@@ -9,6 +9,7 @@ body{
 #b1{
     background-color:green;
     color:white;
+    text-decoration: none;
 
 }
 #b1:hover{
@@ -19,6 +20,7 @@ body{
 {
     background-color:red;
     color:white;
+    text-decoration:none;
 }
 #b2:hover{
     background-color:white;
