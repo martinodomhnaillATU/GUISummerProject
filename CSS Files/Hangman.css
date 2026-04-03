@@ -1,7 +1,26 @@
 body{
     background-color:blue;
+    color:white;
 }
 #img
 {
     text-align:center;
+}
+#b1{
+    background-color:green;
+    color:white;
+
+}
+#b1:hover{
+    background-color:white;
+    color:red;
+}
+#b2
+{
+    background-color:red;
+    color:white;
+}
+#b2:hover{
+    background-color:white;
+    color:red;
 }

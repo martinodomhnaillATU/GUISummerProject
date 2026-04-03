@@ -1,0 +1,13 @@
+body{
+    background-color:blue;
+    color:white;
+}
+#img
+{
+    text-align:center;
+}
+button
+{
+    background-color: white;
+    color:blue;
+}
