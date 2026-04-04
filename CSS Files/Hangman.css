@@ -10,19 +10,24 @@ body{
     background-color:green;
     color:white;
     text-decoration: none;
+    text-align:center;
 
 }
 #b1:hover{
     background-color:white;
-    color:red;
+    color:green;
 }
 #b2
 {
     background-color:red;
     color:white;
     text-decoration:none;
+    text-align:center;
 }
 #b2:hover{
     background-color:white;
     color:red;
+}
+#buttons{
+    text-align:center;
 }
