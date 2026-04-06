@@ -25,7 +25,7 @@ function rounds()
         letters = word1.charAt(0)+" ";
         maximumScore += word1.length*5;
         document.getElementById("RoundNo").innerHTML = "Round "+i;
-        for(let j = 1; j <= word1.length - 1; j++)
+        for(let k = 1; k <= word1.length - 1; k++)
         {
             letters += "_ ";
         }
@@ -49,13 +49,14 @@ function rounds()
                     document.getElementById("edit").innerHTML="Well done! You guessed it correctly!";
                     sum = maximumScore;
                     j = 6;
-                    document.getElementById("button").innerHTML = "<button onclick='clearAll()' id='refresh'>Play Again</button><a href='Hangman3.html'><button id='b2'>Display Results</button></a>";
+                    document.getElementById("button").innerHTML = "<p id='buttons2'><button onclick='clearAll()' id='refresh'>Play Again</button><a href='Hangman3.html'><button id='b2'>Display Results</button></a></p>";
                     document.getElementById("b2").style.color = "blue";
                     document.getElementById("b2").style.backgroundColor = "white";
                     document.getElementById("b2").style.textAlign = "center";
                     document.getElementById("refresh").style.color = "white";
                     document.getElementById("refresh").style.backgroundColor = "green";
                     document.getElementById("refresh").style.textAlign = "center";
+                    document.getElementById("buttons2").style.textAlign = "center";
 
                 }
                 else
