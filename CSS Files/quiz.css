@@ -1,0 +1,9 @@
+.quiz-img {
+  width: 400px;
+  height: 400px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 20px auto; /* Centers it and adds space below */
+  background-color: #f9f9f9; /* Optional: adds a subtle background to the "box" */
+  border-radius: 8px;        /* Optional: makes the corners look pro */
+}

@@ -1,15 +1,66 @@
-let img = ['<img src="images/runners.png">','<img src="images/shoes.jpg">','<img src="images/socks.jpg">'];
-
+let img = [
+  '<img src="/images/quiz images/avocado.jpg" class="quiz-img">',
+  '<img src="/images/quiz images/compass.jpg" class="quiz-img">',
+  '<img src="/images/quiz images/feather.jpg" class="quiz-img">',
+  '<img src="/images/quiz images/hourglass.jpg" class="quiz-img">',
+  '<img src="/images/quiz images/microscope.jpg" class="quiz-img">',
+  '<img src="/images/quiz images/shoes.jpg" class="quiz-img">',
+  '<img src="/images/quiz images/stapler.jpg" class="quiz-img">',
+  '<img src="/images/quiz images/telescope.jpg" class="quiz-img">',
+  '<img src="/images/quiz images/tower.webp" class="quiz-img">',
+  '<img src="/images/quiz images/typewriter.jpg" class="quiz-img">',
+];
+let answers = [
+  ['avocado'],
+  ['compass'],
+  ['feather'],
+  ['hourglass', 'sand timer'],
+  ['microscope'],
+  ['shoes', 'sneakers', 'trainers'],
+  ['stapler'],
+  ['telescope'],
+  ['tower', 'eiffel tower'],
+  ['typewriter'],
+];
 let index = 0;
-
-document.getElementById("img").innerHTML = img[2];
-function showImg()
+let correct = 0;
+let incorrect = 0;
+let score = 0;
+function playAgain()
 {
-    document.getElementById("img").innerHTML = img[index];
-    if (index === img.length-1){
-        index = 0;
+    index = 0;
+    correct = 0;
+    score = 0;
+    document.getElementById("img").innerHTML = img[0];
+}
+
+document.getElementById("img").innerHTML = img[0];
+function checkAnswer()
+{
+    let inputField = document.getElementById("answer1").value;
+    let answer = inputField.toLowerCase().trim();
+
+    //checking if the answer is correct
+    if (answers[index].includes(answer)){
+        document.getElementById("result").innerHTML = "Correct guess ";
+        correct++;
+        score+=10;
     }
     else{
-        index++;
+        document.getElementById("result").innerHTML = "fail";
     }
+
+    index++;
+
+    //checking if the user has reached the end of the quiz
+    if(index<img.length){
+        document.getElementById("img").innerHTML = img[index];
+    }
+    else{
+        document.getElementById("result").innerHTML = "Quiz Finished" + correct;
+    }
+
+    inputField.value = "";//clearing the input field
+    answer.value = "";
 }
+
