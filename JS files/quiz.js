@@ -28,10 +28,13 @@ let incorrect = 0;
 let score = 0;
 function playAgain()
 {
+    //resetting everything
     index = 0;
     correct = 0;
     score = 0;
+    incorrect = 0;
     document.getElementById("img").innerHTML = img[0];
+    document.getElementById("result").innerHTML = "";
 }
 
 document.getElementById("img").innerHTML = img[0];
@@ -57,10 +60,11 @@ function checkAnswer()
         document.getElementById("img").innerHTML = img[index];
     }
     else{
-        document.getElementById("result").innerHTML = "Quiz Finished" + correct;
+        document.getElementById("result").innerHTML = "Quiz Finished. Correct Answers: " + correct;
     }
 
     inputField.value = "";//clearing the input field
     answer.value = "";
 }
+
 
