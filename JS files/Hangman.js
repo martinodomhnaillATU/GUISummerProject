@@ -1,3 +1,4 @@
+//whole code written by Rio Luis
 const words = [
   "apple","banana","orange","grape","cherry","mango","peach","apricot","coconut","papaya",
   "vehicle","bicycle","scooter","subway","rocket","airplane","helicopter","tramway","sailboat","spaceship",
@@ -13,7 +14,7 @@ localStorage.pointsObtained = 0;
 localStorage.maxPoints = 0;
   let n1,n=0,i,word1,letters = "",sum=0,maximumScore=0,j;
 function rounds()
-{
+{   //main starting function
     n++;
     
     
@@ -32,7 +33,7 @@ function rounds()
         document.getElementById("word").innerHTML = letters;
         document.getElementById("placeholder").innerHTML = "";
         document.getElementById("img").innerHTML = "<img src='hangmanStart.jpg' width='200px' height='200px'>";
-        j = 1;
+        j = 0;
     
     
     
@@ -41,7 +42,7 @@ function rounds()
         
         
             function hangman()
-            {
+            {   //main guessing function
                 
                 let word2 = document.getElementById("guess").value.toLowerCase();
                 if(word1 === word2)
@@ -65,7 +66,7 @@ function rounds()
                     j++;
                     letters = word1.charAt(0)+" ";
                     for(let k = 1;  k < word1.length; k++)
-                    {
+                    {//function to check if guessed word has letters in common with entered word
                         
                         
                             if(word2.includes(word1.charAt(k)))
@@ -80,7 +81,7 @@ function rounds()
                     }
                     document.getElementById("word").innerHTML = letters;
                     switch(j)
-                    {
+                    {   //switch ladder to assign image according to number of incorrect guesses
                         case 1:
                         document.getElementById("img").innerHTML = "<img src='hangman1.jpg' width='200px' height='200px'>";
                         break;
@@ -112,15 +113,16 @@ function rounds()
                 }
             }
             function clearAll()
-            {
+            {   //function to reset webpage
                 document.getElementById("RoundNo").innerHTML = "";
                 document.getElementById("word").innerHTML = "";
                 document.getElementById("img").innerHTML = "";
                 document.getElementById("edit").innerHTML = "";
-                document.getElementById("button").innerHTML = "";
+                document.getElementById("button").innerHTML = "<img src='hangmanStart.jpg' width='200px' height='200px'>";
+                
             }
             function finalStorage()
-            {
+            {   //final function to store values for displaying results.\
                 localStorage.gamesPlayed = n;
                 localStorage.pointsObtained = sum;
                 localStorage.maxPoints = maximumScore;
