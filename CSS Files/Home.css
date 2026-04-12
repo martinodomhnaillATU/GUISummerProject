@@ -1,3 +1,6 @@
 body{
     background-color:blue;
 }
+.imgBorder{
+    border: solid 10px white;
+}
