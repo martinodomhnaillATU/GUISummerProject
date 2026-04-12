@@ -32,7 +32,7 @@ function rounds()
         }
         document.getElementById("word").innerHTML = letters;
         document.getElementById("placeholder").innerHTML = "";
-        document.getElementById("img").innerHTML = "<img src='hangmanStart.jpg' width='200px' height='200px'>";
+        document.getElementById("img").innerHTML = "<img src='../images/Hangman images/hangmanStart.jpg' width='200px' height='200px'>";
         j = 0;
         revealed = [];
         
@@ -95,19 +95,19 @@ function rounds()
                     switch(j)
                     {   //switch ladder to assign image according to number of incorrect guesses
                         case 1:
-                        document.getElementById("img").innerHTML = "<img src='hangman1.jpg' width='200px' height='200px'>";
+                        document.getElementById("img").innerHTML = "<img src='../images/Hangman images/hangman1.jpg' width='200px' height='200px'>";
                         break;
                         case 2:
-                        document.getElementById("img").innerHTML = "<img src='hangman2.jpg' width='200px' height='200px'>";
+                        document.getElementById("img").innerHTML = "<img src='../images/Hangman images/hangman2.jpg' width='200px' height='200px'>";
                         break;
                         case 3:
-                        document.getElementById("img").innerHTML = "<img src='hangman3.jpg' width='200px' height='200px'>";
+                        document.getElementById("img").innerHTML = "<img src='../images/Hangman images/hangman3.jpg' width='200px' height='200px'>";
                         break;
                         case 4:
-                        document.getElementById("img").innerHTML = "<img src='hangman4.jpg' width='200px' height='200px'>";
+                        document.getElementById("img").innerHTML = "<img src='../images/Hangman images/hangman4.jpg' width='200px' height='200px'>";
                         break;
                         case 5:
-                        document.getElementById("img").innerHTML = "<img src='hangman5.jpg' width='200px' height='200px'>";
+                        document.getElementById("img").innerHTML = "<img src='../images/Hangman images/hangman5.jpg' width='200px' height='200px'>";
                         break;
                         case 6:
                         document.getElementById("img").innerHTML = "<img src='hangman6.jpg' width='200px' height='200px'>";
