@@ -12,7 +12,7 @@ const words = [
 localStorage.gamesPlayed = 0;
 localStorage.pointsObtained = 0;
 localStorage.maxPoints = 0;
-  let n1,n=0,i,word1,letters = "",sum=0,maximumScore=0,j;
+  let n1,n=0,i,word1,letters = "",sum=0,maximumScore=0,j, revealed=[];
 function rounds()
 {   //main starting function
     n++;
@@ -21,11 +21,11 @@ function rounds()
     
     
         document.getElementById("guessBtn").disabled = false;
-        n1 = Math.floor(Math.random()*100);
+        n1 = Math.floor(Math.random()*words.length);
         word1 = words[n1];
         letters = word1.charAt(0)+" ";
         maximumScore += word1.length*5;
-        document.getElementById("RoundNo").innerHTML = "Round "+i;
+        document.getElementById("RoundNo").innerHTML = "Round "+n;
         for(let k = 1; k <= word1.length - 1; k++)
         {
             letters += "_ ";
@@ -34,7 +34,8 @@ function rounds()
         document.getElementById("placeholder").innerHTML = "";
         document.getElementById("img").innerHTML = "<img src='hangmanStart.jpg' width='200px' height='200px'>";
         j = 0;
-    
+        revealed = [];
+        
     
     
 }
@@ -45,12 +46,17 @@ function rounds()
             {   //main guessing function
                 
                 let word2 = document.getElementById("guess").value.toLowerCase();
+                if(!word2)
+                {
+                    alert("Please enter a guess!!");
+                    return;
+                }
                 if(word1 === word2)
                 {
                     document.getElementById("edit").innerHTML="Well done! You guessed it correctly!";
                     sum = maximumScore;
                     j = 6;
-                    document.getElementById("button").innerHTML = "<p id='buttons2'><button onclick='clearAll()' id='refresh'>Play Again</button><a href='Hangman3.html'><button id='b2'>Display Results</button></a></p>";
+                    document.getElementById("button").innerHTML = "<p id='buttons2'><button onclick='clearAll()' id='refresh'>Play Again</button><a href='Hangman3.html'><button id='b2' onclick= 'finalStorage()'>Display Results</button></a></p>";
                     document.getElementById("b2").style.color = "blue";
                     document.getElementById("b2").style.backgroundColor = "white";
                     document.getElementById("b2").style.textAlign = "center";
@@ -65,19 +71,25 @@ function rounds()
 
                     j++;
                     letters = word1.charAt(0)+" ";
-                    for(let k = 1;  k < word1.length; k++)
-                    {//function to check if guessed word has letters in common with entered word
-                        
-                        
-                            if(word2.includes(word1.charAt(k)))
-                            {
+                    for (let k = 1; k < word1.length; k++) 
+                    {
+                        let currentLetter = word1.charAt(k);
 
+                        if (word2.includes(currentLetter) || revealed[k]) 
+                        {
+
+                            // If it's newly discovered
+                            if (!revealed[k] && word2.includes(currentLetter)) 
+                            {
                                 sum += 5;
-                                letters += word1.charAt(k);
+                                revealed[k] = true;
                             }
-                            else
-                                letters += "_ ";
-                        
+
+                            letters += currentLetter + " ";
+                        } else 
+                        {
+                            letters += "_ ";
+                        }
                     }
                     document.getElementById("word").innerHTML = letters;
                     switch(j)
@@ -101,8 +113,8 @@ function rounds()
                         document.getElementById("img").innerHTML = "<img src='hangman6.jpg' width='200px' height='200px'>";
                         document.getElementById("edit").innerHTML = "You're out of guesses!! The correct answer was: "+word1;
                         document.getElementById("button").innerHTML = "<button onclick='clearAll()' id='refresh'>Play Again</button><a href='Hangman3.html'><button id='b2' onclick='finalStorage()'>Display Results</button></a>";
-                        document.getElementById("b2").style.color = "blue";
-                        document.getElementById("b2").style.backgroundColor = "white";
+                        document.getElementById("b2").style.color = "white";
+                        document.getElementById("b2").style.backgroundColor = "red";
                         document.getElementById("b2").style.textAlign = "center";
                         document.getElementById("refresh").style.color = "white";
                         document.getElementById("refresh").style.backgroundColor = "green";
@@ -111,6 +123,7 @@ function rounds()
 
                     }
                 }
+                document.getElementById("guess").value = "";
             }
             function clearAll()
             {   //function to reset webpage
@@ -118,11 +131,12 @@ function rounds()
                 document.getElementById("word").innerHTML = "";
                 document.getElementById("img").innerHTML = "";
                 document.getElementById("edit").innerHTML = "";
-                document.getElementById("button").innerHTML = "<img src='hangmanStart.jpg' width='200px' height='200px'>";
+                document.getElementById("button").innerHTML = "";
                 
             }
             function finalStorage()
-            {   //final function to store values for displaying results.\
+            {   //final function to store values for displaying results.
+
                 localStorage.gamesPlayed = n;
                 localStorage.pointsObtained = sum;
                 localStorage.maxPoints = maximumScore;
