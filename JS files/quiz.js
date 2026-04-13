@@ -48,9 +48,13 @@ function checkAnswer()
         document.getElementById("result").innerHTML = "Correct guess ";
         correct++;
         score+=10;
+        localStorage.correct = correct;
+        console.log(score);
     }
     else{
         document.getElementById("result").innerHTML = "fail";
+        incorrect++;
+        localStorage.incorrect = incorrect;
     }
 
     index++;
@@ -67,4 +71,7 @@ function checkAnswer()
     answer.value = "";
 }
 
+if (index === img.length){
+    document.getElementById("results").innerHTML = "<button class='bg-warning' ><a href='quizResults.html' class='text-black'>Check Results</a></button>"
+}
 
