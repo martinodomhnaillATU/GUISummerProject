@@ -25,38 +25,35 @@ let answers = [
 let index = 0;
 let correct = 0;
 let incorrect = 0;
-let score = 0;
 function playAgain()
 {
     //resetting everything
     index = 0;
     correct = 0;
-    score = 0;
     incorrect = 0;
     document.getElementById("img").innerHTML = img[0];
     document.getElementById("result").innerHTML = "";
 }
 
 document.getElementById("img").innerHTML = img[0];
+
+//checks if answer is correct
 function checkAnswer()
 {
     let inputField = document.getElementById("answer1").value;
     let answer = inputField.toLowerCase().trim();
 
-    //checking if the answer is correct
+    //tells user the answer is correct or wrong
     if (answers[index].includes(answer)){
-        document.getElementById("result").innerHTML = "Correct guess ";
+        document.getElementById("result").innerHTML = "CORRECT!!";
         correct++;
-        score+=10;
-        localStorage.correct = correct;
-        console.log(score);
     }
     else{
-        document.getElementById("result").innerHTML = "fail";
+        document.getElementById("result").innerHTML = "FAIL!";
         incorrect++;
-        localStorage.incorrect = incorrect;
     }
 
+    //moving to the next picture
     index++;
 
     //checking if the user has reached the end of the quiz
@@ -64,14 +61,16 @@ function checkAnswer()
         document.getElementById("img").innerHTML = img[index];
     }
     else{
-        document.getElementById("result").innerHTML = "Quiz Finished. Correct Answers: " + correct;
+        document.getElementById("result").innerHTML = "Quiz Finished.";
     }
 
     inputField.value = "";//clearing the input field
     answer.value = "";
 }
 
-if (index === img.length){
+    document.getElementById("results").innerHTML = "<button class='bg-warning' ><a href='quizResults.html' class='text-black'>Check Results</a></button>"
+
+if (index === img.length-1){
     document.getElementById("results").innerHTML = "<button class='bg-warning' ><a href='quizResults.html' class='text-black'>Check Results</a></button>"
 }
 
