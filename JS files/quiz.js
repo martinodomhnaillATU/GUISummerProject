@@ -25,28 +25,35 @@ let answers = [
 let index = 0;
 let correct = 0;
 let incorrect = 0;
+let score = 0;
 function playAgain()
 {
     //resetting everything
     index = 0;
     correct = 0;
     incorrect = 0;
+    score = 0;
     document.getElementById("img").innerHTML = img[0];
     document.getElementById("result").innerHTML = "";
+    document.getElementById("correct").innerHTML = correct;
+    document.getElementById("incorrect").innerHTML = incorrect;
+    document.getElementById("score").innerHTML=score;
 }
 
 document.getElementById("img").innerHTML = img[0];
 
 //checks if answer is correct
+
 function checkAnswer()
 {
     let inputField = document.getElementById("answer1").value;
     let answer = inputField.toLowerCase().trim();
 
-    //tells user the answer is correct or wrong
+    //tells user the answer is correct or wrong and giving them a score
     if (answers[index].includes(answer)){
         document.getElementById("result").innerHTML = "CORRECT!!";
         correct++;
+        score+=10;
     }
     else{
         document.getElementById("result").innerHTML = "FAIL!";
@@ -66,11 +73,16 @@ function checkAnswer()
 
     inputField.value = "";//clearing the input field
     answer.value = "";
+    showScore();
+}
+//showing scores
+function showScore()
+{
+    document.getElementById("correct").innerHTML = correct;
+    document.getElementById("incorrect").innerHTML = incorrect;
+    document.getElementById("score").innerHTML=score;
 }
 
-    document.getElementById("results").innerHTML = "<button class='bg-warning' ><a href='quizResults.html' class='text-black'>Check Results</a></button>"
 
-if (index === img.length-1){
-    document.getElementById("results").innerHTML = "<button class='bg-warning' ><a href='quizResults.html' class='text-black'>Check Results</a></button>"
-}
+
 
