@@ -1,0 +1,26 @@
+.quiz-img {
+  width: 400px;
+  height: 400px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 20px auto;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+body{
+  background-color: blue;
+  color: white;
+}
+
+button:hover
+{
+  background-color: orange;
+  color: black;
+}
+a{
+  text-decoration: none;
+}
+a:hover{
+  color:black;
+  background-color: white;
+}

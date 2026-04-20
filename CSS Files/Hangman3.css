@@ -8,8 +8,10 @@ th,td{
 }
 table{
     text-align:center;
-    width:40%;
-    height:40%;
+    width:60%;
+    height:60%;
+    margin-left:auto;
+    margin-right:auto;
 }
 #exit
 {
@@ -21,4 +23,7 @@ table{
 #exit:hover{
     background-color:white;
     color:red;
+}
+#exitBtn{
+    text-align:center;
 }

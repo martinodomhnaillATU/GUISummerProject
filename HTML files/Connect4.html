@@ -94,6 +94,24 @@
 </head>
 <body>
 
+  <div class="container">
+      <nav class="navbar navbar-expand-lg bg-body-tertiary p-2 text-center fs-1 text-primary bg-white mt-2 rounded-1">
+        <div class="container-fluid text-center fs-1 text-primary bg-white mt-1">
+          <a class="navbar-brand text-primary bg-white" href="#">Menu</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse fs-3 text-center" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link active text-primary bg-white text-decoration-underline" aria-current="page" href="Home.html">Home</a>
+              <a class="nav-link text-primary bg-white text-decoration-underline" href="Hangman.html">Hangman</a>
+              <a class="nav-link text-primary bg-white text-decoration-underline" href="Connect4.html">Connect-4</a>
+              <a class="nav-link text-primary bg-white text-decoration-underline" href="QuizGame.html">Quiz Game</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
   <div class="banner">🎮 Welcome to Four in a Row</div>
   <p>Connect four pieces in a row (horizontal, vertical, or diagonal) before your opponent!</p>
 
@@ -104,6 +122,22 @@
   <div class="board" id="board"></div>
 
   <!-- Running score totals across all rounds -->
+  <!-- Link to our external CSS file (sits in the CSS Files folder) -->
+  <link rel="stylesheet" href="../CSS Files/Connect4.css">
+</head>
+<body>
+
+  <!-- ── Page banner ── -->
+  <div class="banner">🎮 Welcome to Four in a Row</div>
+  <p>Connect four pieces in a row (horizontal, vertical, or diagonal) before your opponent!</p>
+
+  <!-- Shows whose turn it currently is -->
+  <div class="turn-alert" id="turnText">Player 1's Turn</div>
+
+  <!-- The game board – cells are injected here dynamically by createBoard() in Connect4.js -->
+  <div class="board" id="board"></div>
+
+  <!-- Running score totals that persist across rounds -->
   <div class="scoreboard">
     🟥 Player 1: <span id="p1Score">0</span> |
     ⚪ Player 2: <span id="p2Score">0</span>
@@ -116,10 +150,18 @@
   <!-- ── Win announcement modal ──
        Shown automatically when a player gets four in a row.
        After the player clicks "Play Again" the board resets for the next round. -->
+  <!-- Play Again resets the board but keeps scores; Reset Scores wipes both tallies -->
+  <button class="btn btn-success mt-2" onclick="resetBoard()">Play Again</button>
+  <button class="btn btn-danger  mt-2" onclick="resetScores()">Reset Scores</button>
+
+  <!-- ── Win / Draw announcement modal ──
+       Shown automatically when the round ends.
+       The "Play Again" button inside it resets the board for the next round. -->
   <div class="modal fade" id="winModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content text-dark text-center p-3">
         <h2 id="winnerText"></h2>
+        <!-- data-bs-dismiss closes the modal; onclick is assigned in Connect4.js -->
         <button class="btn btn-primary" id="playAgainBtn" data-bs-dismiss="modal">Play Again</button>
       </div>
     </div>
@@ -443,6 +485,14 @@
        ════════════════════════════════════════════════════════════ */
     createBoard();
   </script>
+  <!-- Sound effects played by Connect4.js -->
+  <audio id="dropSound" src="https://www.soundjay.com/buttons/sounds/button-16.mp3"></audio>
+  <audio id="winSound"  src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3"></audio>
+
+  <!-- Link to our external JS file (sits in the JS files folder).
+       Placed at the bottom of <body> so the HTML elements above exist
+       in the DOM before the script tries to access them. -->
+  <script src="../JS files/Connect4.js"></script>
 
 </body>
 </html>

@@ -5,18 +5,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Quiz</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="/CSS Files/quiz.css">
   </head>
   <body>
-    <h1>Quiz game</h1>
+    <br>
     <div class="container">
+      <nav class="navbar navbar-expand-lg bg-body-tertiary p-2 text-center fs-1 text-primary bg-white mt-2 rounded-1">
+        <div class="container-fluid text-center fs-1 text-primary bg-white mt-1">
+          <a class="navbar-brand text-primary bg-white" href="#">Menu</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse fs-3 text-center" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link active text-primary bg-white text-decoration-underline" aria-current="page" href="Home.html">Home</a>
+              <a class="nav-link text-primary bg-white text-decoration-underline" href="Hangman.html">Hangman</a>
+              <a class="nav-link text-primary bg-white text-decoration-underline" href="Connect4.html">Connect-4</a>
+              <a class="nav-link text-light bg-primary text-decoration-none rounded-2" href="#">Quiz Game</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div class=" row h1 text-center mt-3">
+        <div class="border border-primary bg-tertiary p-3 bg-light text-primary rounded-1">
+          General Question Quiz
+        </div>
+      </div>
       <div class="row">
-        <div class="border g-3 text-center p-3">
+        <div class="border border-primary g-3 text-center p-3 col-md-12 col-lg-12 col=12">
           <div id="img"></div>
-          <button onclick="showImg()">next picture</button>
+          <div class="h1" id="result"></div>
+          <input type="text" id="answer1" placeholder="Type your answer here">
+          <button class="bg-success text-light" onclick="checkAnswer()" id="addScore">Check answer</button>
+          <div class="col-12 col-md-12 col-lg-12">
+            <button class="bg-primary text-light" onclick="playAgain()">Play again</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-md-12 col-lg-12 col-12 border border-success">
+            <table class="table table-bordered table-striped table-primary">
+              <thead>
+                <tr class="">
+                  <th scope="col">Questions</th>
+                  <th scope="col">Correct</th>
+                  <th scope="col">Incorrect</th>
+                  <th scope="col">Score</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>10</td>
+                  <td id="correct">0</td>
+                  <td id="incorrect">0</td>
+                  <td id="score">0</td>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
   </body>
 </html>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-<script src="JS files/quiz.js"></script>
+<script src="/JS files/quiz.js">
+  
+</script>
