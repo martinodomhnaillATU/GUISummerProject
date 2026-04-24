@@ -5,163 +5,78 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Four in a Row</title>
 
-  <!-- Bootstrap 5 for modal and button styling -->
+  <!-- =======================================================
+       Written by: Mairtín O Domhnaill
+       Purpose:
+       Loads Bootstrap and external stylesheet for the page.
+       ======================================================= -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-  <style>
-    /* ── Page background: deep radial gradient from navy to near-black ── */
-    body 
-    {
-      background: radial-gradient(circle at top, #1e3a8a, #020617);
-      color: white;
-      text-align: center;
-      font-family: 'Segoe UI', sans-serif;
-    }
-
-    /* ── Top banner with a blue-to-purple horizontal gradient ── */
-    .banner 
-    {
-      padding: 30px;
-      font-size: 3rem;
-      font-weight: bold;
-      background: linear-gradient(90deg, #3b82f6, #9333ea);
-      border-radius: 15px;
-      margin: 20px auto;
-      width: fit-content;
-    }
-
-    /* ── The game board: a 7-column CSS grid laid out in a blue rounded box ── */
-    .board 
-    {
-      display: grid;
-      grid-template-columns: repeat(7, 80px);
-      gap: 10px;
-      justify-content: center;
-      margin-top: 20px;
-      padding: 15px;
-      background: #1d4ed8;
-      border-radius: 15px;
-    }
-
-    /* ── Individual cell: dark circular "hole" in the board ── */
-    .cell 
-    {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background: #0f172a;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* ── A game piece (disc) dropped into a cell ──
-       Starts above the cell (top: -100px) and animates down to top: 0
-       to create the "falling" effect                                    ── */
-    .piece 
-    {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      position: absolute;
-      top: -100px;
-      left: 0;
-      transition: top 0.3s ease-in;
-    }
-
-    /* ── Player colour classes ── */
-    .player1 { background: maroon; }
-    .player2 { background: white;  }
-
-    /* ── Gold glow applied to the four winning cells ── */
-    .win { box-shadow: 0 0 15px 5px gold; }
-
-    /* ── "Player X's Turn" label ── */
-    .turn-alert 
-    {
-      margin: 15px;
-      font-size: 1.5rem;
-    }
-
-    /* ── Score display below the board ── */
-    .scoreboard 
-    {
-      margin-top: 20px;
-      font-size: 1.3rem;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="container">
-      <nav class="navbar navbar-expand-lg bg-body-tertiary p-2 text-center fs-1 text-primary bg-white mt-2 rounded-1">
-        <div class="container-fluid text-center fs-1 text-primary bg-white mt-1">
-          <a class="navbar-brand text-primary bg-white" href="#">Menu</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse fs-3 text-center" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-              <a class="nav-link active text-primary bg-white text-decoration-underline" aria-current="page" href="Home.html">Home</a>
-              <a class="nav-link text-primary bg-white text-decoration-underline" href="Hangman.html">Hangman</a>
-              <a class="nav-link text-primary bg-white text-decoration-underline" href="Connect4.html">Connect-4</a>
-              <a class="nav-link text-primary bg-white text-decoration-underline" href="QuizGame.html">Quiz Game</a>
-            </div>
-          </div>
-        </div>
-      </nav>
-
-  <div class="banner">🎮 Welcome to Four in a Row</div>
-  <p>Connect four pieces in a row (horizontal, vertical, or diagonal) before your opponent!</p>
-
-  <!-- Shows whose turn it is -->
-  <div class="turn-alert" id="turnText">Player 1's Turn</div>
-
-  <!-- The game board cells are injected here by createBoard() -->
-  <div class="board" id="board"></div>
-
-  <!-- Running score totals across all rounds -->
-  <!-- Link to our external CSS file (sits in the CSS Files folder) -->
   <link rel="stylesheet" href="../CSS Files/Connect4.css">
 </head>
 <body>
 
-  <!-- ── Page banner ── -->
-  <div class="banner">🎮 Welcome to Four in a Row</div>
-  <p>Connect four pieces in a row (horizontal, vertical, or diagonal) before your opponent!</p>
+  <div class="container">
 
-  <!-- Shows whose turn it currently is -->
-  <div class="turn-alert" id="turnText">Player 1's Turn</div>
+    <!-- =======================================================
+         Written by: Mairtín O Domhnaill
+         Purpose:
+         Navigation menu linking to other game pages.
+         ======================================================= -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary p-2 text-center fs-1 text-primary bg-white mt-2 rounded-1">
+      <div class="container-fluid">
+        <a class="navbar-brand text-primary" href="#">Menu</a>
 
-  <!-- The game board – cells are injected here dynamically by createBoard() in Connect4.js -->
-  <div class="board" id="board"></div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-  <!-- Running score totals that persist across rounds -->
-  <div class="scoreboard">
-    🟥 Player 1: <span id="p1Score">0</span> |
-    ⚪ Player 2: <span id="p2Score">0</span>
+        <div class="collapse navbar-collapse fs-3" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link" href="Home.html">Home</a>
+            <a class="nav-link" href="Hangman.html">Hangman</a>
+            <a class="nav-link active" href="Connect4.html">Connect-4</a>
+            <a class="nav-link" href="QuizGame.html">Quiz Game</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- =======================================================
+         Written by: Mairtín O Domhnaill
+         Purpose:
+         Main game title and instructions.
+         ======================================================= -->
+    <div class="banner">🎮 Welcome to Four in a Row</div>
+    <p>Connect four pieces in a row before your opponent.</p>
+
+    <!-- Turn display -->
+    <div class="turn-alert" id="turnText">Player 1's Turn</div>
+
+    <!-- Game board -->
+    <div class="board" id="board"></div>
+
+    <!-- =======================================================
+         Written by: Mairtín O Domhnaill
+         Purpose:
+         Displays player scores.
+         ======================================================= -->
+    <div class="scoreboard">
+      🟥 Player 1: <span id="p1Score">0</span> |
+      ⚪ Player 2: <span id="p2Score">0</span>
+    </div>
+
+    <!-- Control buttons -->
+    <div class="mt-3">
+      <button class="btn btn-success" onclick="resetBoard()">Play Again</button>
+      <button class="btn btn-danger" onclick="resetScores()">Reset Scores</button>
+    </div>
   </div>
 
-  <br>
-  <button class="btn btn-success mt-2" onclick="resetBoard()">Play Again</button>
-  <button class="btn btn-danger  mt-2" onclick="resetScores()">Reset Scores</button>
-
-  <!-- ── Win announcement modal ──
-       Shown automatically when a player gets four in a row.
-       After the player clicks "Play Again" the board resets for the next round. -->
-  <!-- Play Again resets the board but keeps scores; Reset Scores wipes both tallies -->
-  <button class="btn btn-success mt-2" onclick="resetBoard()">Play Again</button>
-  <button class="btn btn-danger  mt-2" onclick="resetScores()">Reset Scores</button>
-
-  <!-- ── Win / Draw announcement modal ──
-       Shown automatically when the round ends.
-       The "Play Again" button inside it resets the board for the next round. -->
+  <!-- Win Modal -->
   <div class="modal fade" id="winModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content text-dark text-center p-3">
         <h2 id="winnerText"></h2>
-        <!-- data-bs-dismiss closes the modal; onclick is assigned in Connect4.js -->
         <button class="btn btn-primary" id="playAgainBtn" data-bs-dismiss="modal">Play Again</button>
       </div>
     </div>
@@ -169,329 +84,9 @@
 
   <!-- Sound effects -->
   <audio id="dropSound" src="https://www.soundjay.com/buttons/sounds/button-16.mp3"></audio>
-  <audio id="winSound"  src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3"></audio>
+  <audio id="winSound" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3"></audio>
 
-  <script>
-    /* ════════════════════════════════════════════════════════════
-       CONSTANTS & STATE
-       ════════════════════════════════════════════════════════════ */
-
-    const ROWS = 6;   // number of rows in the grid
-    const COLS = 7;   // number of columns in the grid
-
-    // 2-D array representing piece placement:
-    //   0 = empty, 1 = Player 1's piece, 2 = Player 2's piece
-    let board = [];
-
-    // Whose turn it is (1 or 2)
-    let currentPlayer = 1;
-
-    // Cumulative win counts across all rounds
-    let scores = { 1: 0, 2: 0 };
-
-    // Flag: prevents further moves after someone wins
-    let gameOver = false;
-
-
-    /* ════════════════════════════════════════════════════════════
-       createBoard()
-       Builds the visual grid and resets the internal board array.
-       Called at page load and at the start of every new round.
-       ════════════════════════════════════════════════════════════ */
-    function createBoard() 
-    {
-      const boardDiv = document.getElementById('board');
-      boardDiv.innerHTML = ''; // clear any existing cells from the previous round
-      board = [];              // reset the logical board
-      gameOver = false;        // allow clicks again
-
-      for (let r = 0; r < ROWS; r++) 
-      {
-        let row = [];
-
-        for (let c = 0; c < COLS; c++) 
-        {
-          // Create one circular cell element
-          const cell = document.createElement('div');
-          cell.classList.add('cell');
-
-          // Store row/col as data attributes so handleClick knows where this cell is
-          cell.dataset.row = r;
-          cell.dataset.col = c;
-
-          // Each cell listens for a click to drop a piece into that column
-          cell.addEventListener('click', handleClick);
-
-          boardDiv.appendChild(cell);
-          row.push(0); // 0 = empty in the logical grid
-        }
-
-        board.push(row);
-      }
-    }
-
-
-    /* ════════════════════════════════════════════════════════════
-       handleClick(e)
-       Fired when the player clicks any cell.
-       Finds the lowest empty row in the clicked column, places a
-       piece there, then checks for a win or a draw.
-       ════════════════════════════════════════════════════════════ */
-    function handleClick(e) 
-    {
-      if (gameOver) return; // ignore clicks after the round has ended
-
-      // FIX: parse col as an integer.
-      // dataset values are always strings; using them as array indices
-      // works for simple access but causes subtle bugs in strict comparisons,
-      // so we convert explicitly with parseInt().
-      const col = parseInt(e.target.dataset.col);
-
-      // Search from the bottom row upward for the first empty slot
-      for (let r = ROWS - 1; r >= 0; r--) 
-      {
-        if (board[r][col] === 0) 
-        {
-          // Mark the logical board
-          board[r][col] = currentPlayer;
-
-          // Animate a piece falling into this cell
-          dropPiece(r, col);
-
-          // Play the drop sound
-          document.getElementById('dropSound').play().catch(() => {});
-
-          // Check whether this move created four in a row
-          const winCells = checkWin(r, col);
-
-          if (winCells) 
-          {
-            gameOver = true;              // lock the board
-            highlightWin(winCells);       // gold-glow the winning cells
-
-            scores[currentPlayer]++;      // increment winner's score BEFORE display
-            updateScores();               // refresh the scoreboard immediately
-
-            document.getElementById('winSound').play().catch(() => {});
-
-            // Short delay lets the winning animation render before the modal appears
-            setTimeout(() => showWinner(), 500);
-            return;
-          }
-
-          // Check for a draw: if the top row is completely full, no more moves are possible
-          if (board[0].every(cell => cell !== 0)) 
-          {
-            gameOver = true;
-            setTimeout(() => showDraw(), 500);
-            return;
-          }
-
-          // No win or draw – switch to the other player and update the label
-          currentPlayer = currentPlayer === 1 ? 2 : 1;
-          updateTurnText();
-          return;
-        }
-      }
-
-      alert("Column is full! Choose another.");
-    }
-
-
-    /* ════════════════════════════════════════════════════════════
-       dropPiece(r, c)
-       Creates a coloured disc element inside the target cell and
-       animates it dropping from above (CSS transition on `top`).
-       ════════════════════════════════════════════════════════════ */
-    function dropPiece(r, c) 
-    {
-      const cell = document.querySelector(`.cell[data-row="${r}"][data-col="${c}"]`);
-
-      const piece = document.createElement('div');
-      piece.classList.add('piece', currentPlayer === 1 ? 'player1' : 'player2');
-
-      // Piece starts off-screen above the cell (top: -100px set in CSS)
-      cell.appendChild(piece);
-
-      // A tiny delay before setting top: 0 is necessary so the browser
-      // registers the initial position before the transition fires
-      setTimeout(() => { piece.style.top = '0px'; }, 10);
-    }
-
-
-    /* ════════════════════════════════════════════════════════════
-       updateTurnText()
-       Updates the "Player X's Turn" label between moves.
-       ════════════════════════════════════════════════════════════ */
-    function updateTurnText() 
-    {
-      document.getElementById('turnText').innerText = `Player ${currentPlayer}'s Turn`;
-    }
-
-
-    /* ════════════════════════════════════════════════════════════
-       updateScores()
-       Reads the scores object and refreshes both score <span>s.
-       ════════════════════════════════════════════════════════════ */
-    function updateScores() 
-    {
-      document.getElementById('p1Score').innerText = scores[1];
-      document.getElementById('p2Score').innerText = scores[2];
-    }
-
-
-    /* ════════════════════════════════════════════════════════════
-       resetBoard()
-       Starts a fresh round: resets to Player 1, rebuilds the grid.
-       Scores are preserved – only the board state is cleared.
-       ════════════════════════════════════════════════════════════ */
-    function resetBoard() 
-    {
-      currentPlayer = 1;
-      createBoard();
-      updateTurnText();
-    }
-
-
-    /* ════════════════════════════════════════════════════════════
-       resetScores()
-       Zeroes out both players' scores and refreshes the display.
-       ════════════════════════════════════════════════════════════ */
-    function resetScores() 
-    {
-      scores = { 1: 0, 2: 0 };
-      updateScores();
-    }
-
-
-    /* ════════════════════════════════════════════════════════════
-       showWinner()
-       Populates and displays the win modal.
-       Wires the "Play Again" button to resetBoard() so clicking
-       it resets the board for the next round.
-       ════════════════════════════════════════════════════════════ */
-    function showWinner() 
-    {
-      document.getElementById('winnerText').innerText = `🎉 Player ${currentPlayer} Wins!`;
-
-      // Assign resetBoard to the button fresh each round to avoid
-      // stacking multiple listeners from previous rounds
-      document.getElementById('playAgainBtn').onclick = () => {
-        resetBoard();
-      };
-
-      new bootstrap.Modal(document.getElementById('winModal')).show();
-    }
-
-
-    /* ════════════════════════════════════════════════════════════
-       showDraw()
-       Displays the modal with a draw message when the board is full.
-       ════════════════════════════════════════════════════════════ */
-    function showDraw() 
-    {
-      document.getElementById('winnerText').innerText = `🤝 It's a Draw!`;
-
-      document.getElementById('playAgainBtn').onclick = () => {
-        resetBoard();
-      };
-
-      new bootstrap.Modal(document.getElementById('winModal')).show();
-    }
-
-
-    /* ════════════════════════════════════════════════════════════
-       checkWin(r, c)
-       After a piece is placed at (r, c), tests all four directions:
-         – vertical   (dr=1, dc=0)
-         – horizontal (dr=0, dc=1)
-         – diagonal ↘ (dr=1, dc=1)
-         – diagonal ↙ (dr=1, dc=-1)
-       Returns the array of winning cell coordinates, or null.
-       ════════════════════════════════════════════════════════════ */
-    function checkWin(r, c) 
-    {
-      return (
-        checkDirection(r, c, 1, 0)  ||  // vertical
-        checkDirection(r, c, 0, 1)  ||  // horizontal
-        checkDirection(r, c, 1, 1)  ||  // diagonal ↘
-        checkDirection(r, c, 1, -1)     // diagonal ↙
-      );
-    }
-
-
-    /* ════════════════════════════════════════════════════════════
-       checkDirection(r, c, dr, dc)
-       Walks in both directions along a given vector (dr, dc) from
-       the placed piece, collecting matching cells.
-       Returns the cell list if it contains 4 or more, else null.
-       ════════════════════════════════════════════════════════════ */
-    function checkDirection(r, c, dr, dc) 
-    {
-      let cells = [[r, c]];
-      cells = cells.concat(countCells(r, c,  dr,  dc));
-      cells = cells.concat(countCells(r, c, -dr, -dc));
-      return cells.length >= 4 ? cells : null;
-    }
-
-
-    /* ════════════════════════════════════════════════════════════
-       countCells(r, c, dr, dc)
-       Walks step-by-step in direction (dr, dc) from (r, c),
-       collecting coordinates as long as the cell belongs to the
-       same player. Stops at the board edge or an opponent's piece.
-       Returns an array of [row, col] pairs (not including start).
-       ════════════════════════════════════════════════════════════ */
-    function countCells(r, c, dr, dc) 
-    {
-      let result = [];
-      const player = board[r][c];
-      let nr = r + dr;
-      let nc = c + dc;
-
-      while (
-        nr >= 0 && nr < ROWS &&
-        nc >= 0 && nc < COLS &&
-        board[nr][nc] === player
-      ) 
-      {
-        result.push([nr, nc]);
-        nr += dr;
-        nc += dc;
-      }
-
-      return result;
-    }
-
-
-    /* ════════════════════════════════════════════════════════════
-       highlightWin(cells)
-       Adds the CSS 'win' class (gold glow) to each of the four
-       winning cells so the player can see the winning line.
-       ════════════════════════════════════════════════════════════ */
-    function highlightWin(cells) 
-    {
-      cells.forEach(([r, c]) => 
-      {
-        const cell = document.querySelector(`.cell[data-row="${r}"][data-col="${c}"]`);
-        if (cell) cell.classList.add('win');
-      });
-    }
-
-
-    /* ════════════════════════════════════════════════════════════
-       INITIALISE
-       Build the board as soon as the page loads.
-       ════════════════════════════════════════════════════════════ */
-    createBoard();
-  </script>
-  <!-- Sound effects played by Connect4.js -->
-  <audio id="dropSound" src="https://www.soundjay.com/buttons/sounds/button-16.mp3"></audio>
-  <audio id="winSound"  src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3"></audio>
-
-  <!-- Link to our external JS file (sits in the JS files folder).
-       Placed at the bottom of <body> so the HTML elements above exist
-       in the DOM before the script tries to access them. -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../JS files/Connect4.js"></script>
 
 </body>
