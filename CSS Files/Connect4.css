@@ -1,11 +1,12 @@
 /* ==========================================================
    File: Connect4.css
-   Written by: Mairtín O Domhnaill
+   Written by: Mairtin O Domhnaill
    Purpose:
    Controls the appearance of the Connect 4 game.
    ========================================================== */
 
-body {
+body 
+{
   background: radial-gradient(circle at top, #1e3a8a, #020617);
   color: white;
   text-align: center;
@@ -13,7 +14,8 @@ body {
 }
 
 /* Banner styling */
-.banner {
+.banner 
+{
   padding: 30px;
   font-size: 3rem;
   font-weight: bold;
@@ -24,11 +26,12 @@ body {
 }
 
 /* ==========================================================
-   Written by: Mairtín O Domhnaill
+   Written by: Mairtin O Domhnaill
    Purpose:
    Creates the 7-column game board layout.
    ========================================================== */
-.board {
+.board 
+{
   display: grid;
   grid-template-columns: repeat(7, 80px);
   gap: 10px;
@@ -40,7 +43,8 @@ body {
 }
 
 /* Cell styling */
-.cell {
+.cell 
+{
   width: 80px;
   height: 80px;
   border-radius: 50%;
@@ -51,7 +55,8 @@ body {
 }
 
 /* Falling game piece */
-.piece {
+.piece 
+{
   width: 100%;
   height: 100%;
   border-radius: 50%;
@@ -61,19 +66,28 @@ body {
   transition: top 0.3s ease-in;
 }
 
-.player1 { background: maroon; }
-.player2 { background: white; }
+.player1 
+{ 
+  background: maroon; 
+}
+.player2 
+{ 
+  background: white; 
+}
 
-.win {
+.win 
+{
   box-shadow: 0 0 15px 5px gold;
 }
 
-.turn-alert {
+.turn-alert 
+{
   margin: 15px;
   font-size: 1.5rem;
 }
 
-.scoreboard {
+.scoreboard 
+{
   margin-top: 20px;
   font-size: 1.3rem;
 }
