@@ -5,56 +5,88 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Four in a Row</title>
 
-  <!-- Bootstrap 5 for modal and button styling -->
+  <!-- =======================================================
+       Written by: Mairtín O Domhnaill
+       Purpose:
+       Loads Bootstrap and external stylesheet for the page.
+       ======================================================= -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Link to our external CSS file (sits in the CSS Files folder) -->
   <link rel="stylesheet" href="../CSS Files/Connect4.css">
 </head>
 <body>
 
-  <!-- ── Page banner ── -->
-  <div class="banner">🎮 Welcome to Four in a Row</div>
-  <p>Connect four pieces in a row (horizontal, vertical, or diagonal) before your opponent!</p>
+  <div class="container">
 
-  <!-- Shows whose turn it currently is -->
-  <div class="turn-alert" id="turnText">Player 1's Turn</div>
+    <!-- =======================================================
+         Written by: Mairtín O Domhnaill
+         Purpose:
+         Navigation menu linking to other game pages.
+         ======================================================= -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary p-2 text-center fs-1 text-primary bg-white mt-2 rounded-1">
+      <div class="container-fluid">
+        <a class="navbar-brand text-primary" href="#">Menu</a>
 
-  <!-- The game board – cells are injected here dynamically by createBoard() in Connect4.js -->
-  <div class="board" id="board"></div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-  <!-- Running score totals that persist across rounds -->
-  <div class="scoreboard">
-    🟥 Player 1: <span id="p1Score">0</span> |
-    ⚪ Player 2: <span id="p2Score">0</span>
+        <div class="collapse navbar-collapse fs-3" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link" href="Home.html">Home</a>
+            <a class="nav-link" href="Hangman.html">Hangman</a>
+            <a class="nav-link active" href="Connect4.html">Connect-4</a>
+            <a class="nav-link" href="QuizGame.html">Quiz Game</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- =======================================================
+         Written by: Mairtín O Domhnaill
+         Purpose:
+         Main game title and instructions.
+         ======================================================= -->
+    <div class="banner">🎮 Welcome to Four in a Row</div>
+    <p>Connect four pieces in a row before your opponent.</p>
+
+    <!-- Turn display -->
+    <div class="turn-alert" id="turnText">Player 1's Turn</div>
+
+    <!-- Game board -->
+    <div class="board" id="board"></div>
+
+    <!-- =======================================================
+         Written by: Mairtín O Domhnaill
+         Purpose:
+         Displays player scores.
+         ======================================================= -->
+    <div class="scoreboard">
+      🟥 Player 1: <span id="p1Score">0</span> |
+      ⚪ Player 2: <span id="p2Score">0</span>
+    </div>
+
+    <!-- Control buttons -->
+    <div class="mt-3">
+      <button class="btn btn-success" onclick="resetBoard()">Play Again</button>
+      <button class="btn btn-danger" onclick="resetScores()">Reset Scores</button>
+    </div>
   </div>
 
-  <br>
-  <!-- Play Again resets the board but keeps scores; Reset Scores wipes both tallies -->
-  <button class="btn btn-success mt-2" onclick="resetBoard()">Play Again</button>
-  <button class="btn btn-danger  mt-2" onclick="resetScores()">Reset Scores</button>
-
-  <!-- ── Win / Draw announcement modal ──
-       Shown automatically when the round ends.
-       The "Play Again" button inside it resets the board for the next round. -->
+  <!-- Win Modal -->
   <div class="modal fade" id="winModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content text-dark text-center p-3">
         <h2 id="winnerText"></h2>
-        <!-- data-bs-dismiss closes the modal; onclick is assigned in Connect4.js -->
         <button class="btn btn-primary" id="playAgainBtn" data-bs-dismiss="modal">Play Again</button>
       </div>
     </div>
   </div>
 
-  <!-- Sound effects played by Connect4.js -->
+  <!-- Sound effects -->
   <audio id="dropSound" src="https://www.soundjay.com/buttons/sounds/button-16.mp3"></audio>
-  <audio id="winSound"  src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3"></audio>
+  <audio id="winSound" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3"></audio>
 
-  <!-- Link to our external JS file (sits in the JS files folder).
-       Placed at the bottom of <body> so the HTML elements above exist
-       in the DOM before the script tries to access them. -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../JS files/Connect4.js"></script>
 
 </body>

@@ -31,28 +31,36 @@ function playAgain()
     //resetting everything
     index = 0;
     correct = 0;
-    score = 0;
     incorrect = 0;
+    score = 0;
     document.getElementById("img").innerHTML = img[0];
     document.getElementById("result").innerHTML = "";
+    document.getElementById("correct").innerHTML = correct;
+    document.getElementById("incorrect").innerHTML = incorrect;
+    document.getElementById("score").innerHTML=score;
 }
 
 document.getElementById("img").innerHTML = img[0];
+
+//checks if answer is correct
+
 function checkAnswer()
 {
     let inputField = document.getElementById("answer1").value;
     let answer = inputField.toLowerCase().trim();
 
-    //checking if the answer is correct
+    //tells user the answer is correct or wrong and giving them a score
     if (answers[index].includes(answer)){
-        document.getElementById("result").innerHTML = "Correct guess ";
+        document.getElementById("result").innerHTML = "CORRECT!!";
         correct++;
         score+=10;
     }
     else{
-        document.getElementById("result").innerHTML = "fail";
+        document.getElementById("result").innerHTML = "FAIL!";
+        incorrect++;
     }
 
+    //moving to the next picture
     index++;
 
     //checking if the user has reached the end of the quiz
@@ -60,11 +68,21 @@ function checkAnswer()
         document.getElementById("img").innerHTML = img[index];
     }
     else{
-        document.getElementById("result").innerHTML = "Quiz Finished. Correct Answers: " + correct;
+        document.getElementById("result").innerHTML = "Quiz Finished.";
     }
 
     inputField.value = "";//clearing the input field
     answer.value = "";
+    showScore();
 }
+//showing scores
+function showScore()
+{
+    document.getElementById("correct").innerHTML = correct;
+    document.getElementById("incorrect").innerHTML = incorrect;
+    document.getElementById("score").innerHTML=score;
+}
+
+
 
 
