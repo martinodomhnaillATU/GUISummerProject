@@ -17,3 +17,10 @@ p{
 #start{
     text-align:center;
 }
+#startBtn
+{
+    width:200px;
+    height:100px;
+    text-align:center;
+    font-size:xx-large;
+}
