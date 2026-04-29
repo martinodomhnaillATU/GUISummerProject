@@ -18,9 +18,9 @@
           </button>
           <div class="collapse navbar-collapse fs-3 text-center" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-              <a class="nav-link active text-primary bg-white text-decoration-underline" aria-current="page" href="Home.html">Home</a>
-              <a class="nav-link text-primary bg-white text-decoration-underline" href="Hangman.html">Hangman</a>
-              <a class="nav-link text-primary bg-white text-decoration-underline" href="Connect4.html">Connect-4</a>
+              <a class="nav-link active text-primary bg-white text-decoration-none" aria-current="page" href="Home.html">Home</a>
+              <a class="nav-link text-primary bg-white text-decoration-none" href="Hangman.html">Hangman</a>
+              <a class="nav-link text-primary bg-white text-decoration-none" href="Connect4.html">Connect-4</a>
               <a class="nav-link text-light bg-primary text-decoration-none rounded-2" href="#">Quiz Game</a>
             </div>
           </div>
@@ -36,9 +36,9 @@
           <div id="img"></div>
           <div class="h1" id="result"></div>
           <input type="text" id="answer1" placeholder="Type your answer here">
-          <button class="bg-success text-light" onclick="checkAnswer()" id="addScore">Check answer</button>
+          <button id="checkAnswer" onclick="checkAnswer()" id="addScore">Check answer</button>
           <div class="col-12 col-md-12 col-lg-12">
-            <button class="bg-primary text-light" onclick="playAgain()">Play again</button>
+            <button id="playAgain" onclick="playAgain()">Play again</button>
           </div>
         </div>
         <div class="row">

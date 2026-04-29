@@ -70,9 +70,6 @@ function checkAnswer()
     else{
         document.getElementById("result").innerHTML = "Quiz Finished.";
     }
-
-    inputField.value = "";//clearing the input field
-    answer.value = "";
     showScore();
 }
 //showing scores

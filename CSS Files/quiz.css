@@ -11,16 +11,26 @@ body{
   background-color: blue;
   color: white;
 }
-
-button:hover
-{
-  background-color: orange;
-  color: black;
-}
 a{
   text-decoration: none;
 }
-a:hover{
-  color:black;
-  background-color: white;
+
+#playAgain{
+  background-color: rgb(37, 79, 169);
+  color: white;
+}
+
+#playAgain:hover{
+  background-color: yellow;
+  color: blue;
+}
+
+#checkAnswer{
+  background-color: green;
+  color: white;
+}
+
+#checkAnswer:hover{
+  background-color: lightskyblue;
+  color: blue;
 }
